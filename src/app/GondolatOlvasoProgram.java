@@ -27,4 +27,32 @@ public class GondolatOlvasoProgram {
             }
         }
     }
+
+    /**
+     * tömb elemeit hármasával
+     */
+    private static void kirak() {
+        
+    }
+
+    /**
+     * Scanner 1-3 közötti szám
+     */
+    private static void melyik() {
+        
+    }
+
+    /**
+     * választott oszlop középre, a sorrendje ne változzon!
+     */
+    private static void kever() {
+        
+    }
+
+    /**
+     * visszaadjuk a középső lapot, ami 21 elemnél a [11]
+     */
+    private static void ezVolt() {
+        
+    }
 }
