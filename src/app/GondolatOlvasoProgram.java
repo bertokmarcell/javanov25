@@ -22,7 +22,7 @@ public class GondolatOlvasoProgram {
             for (String ertek : ertekek) {
                 String lap = szin + "_" + ertek;
                 if(db < 21){
-                    pakli[db++] = lap;
+                    pakli[++db] = lap;
                 }
             }
         }
