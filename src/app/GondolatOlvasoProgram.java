@@ -13,8 +13,8 @@ public class GondolatOlvasoProgram {
         feltolt();
         for (int i = 0; i < 3; i++) {
             kirak();//1 tömb
-            melyik(); //Scanner
-            kever(); //középre
+            int oszlop = melyik(); //Scanner
+            kever(oszlop); //középre
         }
         ezVolt(); //11., azaz középső lap
     }
@@ -49,24 +49,50 @@ public class GondolatOlvasoProgram {
     /**
      * Scanner 1-3 közötti szám
      */
-    private static void melyik() {
+    private static int melyik() {
         boolean jo;
+        int oszlop;
         do {
             System.out.print("melyik oszlop (1-3): ");
-            int oszlop = sc.nextInt();
+            oszlop = sc.nextInt();
             jo = oszlop >= 1 && oszlop <= 3;
             if(!jo){
                 System.out.println("Hibás, újra!");
             }
         } while (!jo);
+        
+        return oszlop;
     }
 
     /**
      * választott oszlop középre, a sorrendje ne változzon!
      */
-    private static void kever() {
-        //később
-        System.out.println("\n---- KEVERÉS... ----\n");
+    private static void kever(int oszlop) {
+        String[] uj = new String[22];
+        switch(oszlop){
+            case 1:
+                for (int i = 1; i <= 7; i++) {
+                    uj[i] = pakli[ 20-(i-1)*3];
+                    uj[i+7] = pakli[ 19-(i-1)*3];
+                    uj[i+14] = pakli[ 21-(i-1)*3];
+                }
+                break;
+            case 2:
+                for (int i = 1; i <= 7; i++) {
+                    uj[i] = pakli[ 19-(i-1)*3];
+                    uj[i+7] = pakli[ 20-(i-1)*3];
+                    uj[i+14] = pakli[ 21-(i-1)*3];
+                }
+                break;
+            case 3:
+                for (int i = 1; i <= 7; i++) {
+                    uj[i] = pakli[ 21-(i-1)*3];
+                    uj[i+7] = pakli[ 19-(i-1)*3];
+                    uj[i+14] = pakli[ 20-(i-1)*3];
+                }
+                break;
+        }
+        pakli = uj;
     }
 
     /**
