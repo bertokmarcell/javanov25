@@ -1,5 +1,6 @@
 package app;
 
+import java.util.Arrays;
 import java.util.Scanner;
 
 public class GondolatOlvasoProgram {
@@ -8,6 +9,9 @@ public class GondolatOlvasoProgram {
     
     static String[] pakli = new String[22];
     
+    public static String[] getPakli(){
+        return Arrays.copyOf(pakli, pakli.length);
+    }
     
     public static void main(String[] args) {
         feltolt();
@@ -19,7 +23,7 @@ public class GondolatOlvasoProgram {
         ezVolt(); //11., azaz középső lap
     }
 
-    private static void feltolt() {
+    public static void feltolt() {
         String[] szinek = {"P", "T", "Z", "M"};
         String[] ertekek = {"Ász", "Kir", "Fel", "X", "IX", "VIII"};
         int db = 0;
@@ -67,7 +71,7 @@ public class GondolatOlvasoProgram {
     /**
      * választott oszlop középre, a sorrendje ne változzon!
      */
-    private static void kever(int oszlop) {
+    public static void kever(int oszlop) {
         String[] uj = new String[22];
         switch(oszlop){
             case 1:
@@ -98,7 +102,8 @@ public class GondolatOlvasoProgram {
     /**
      * visszaadjuk a középső lapot, ami 21 elemnél a [11]
      */
-    private static void ezVolt() {
-        System.out.println("A választott lap: " + pakli[11]);
+    public static String ezVolt() {
+        //System.out.println("A választott lap: " + pakli[11]);
+        return pakli[11];
     }
 }
