@@ -2,20 +2,12 @@ package app;
 import java.util.Arrays;
 import java.util.Scanner;
 public class Controller {
+    
     private static Scanner sc = new Scanner(System.in);
     private static Nezet nezet = new Nezet();
     
     static Model[] pakli = new Model[22];
-
-    public static void main(String[] args) {
-        feltolt();
-        for (int i = 0; i < 3; i++) {
-            kirak();
-            int oszlop = melyik(); 
-            kever(oszlop); 
-        }
-        nezet.kiiras(ezVolt()); 
-    }
+    
     public static void feltolt() {
         String[] szinek = {"P", "T", "Z", "M"};
         String[] ertekek = {"Ász", "Kir", "Fel", "X", "IX", "VIII"};
@@ -30,14 +22,15 @@ public class Controller {
         }
     }
     private static void kirak() {
-        nezet.kiirasf("%-8s%-8s%-8s\n", "1. o.", "2. o.", "3. o.");
+        nezet.kiiras("-----------------------");
+        nezet.kiirasf("%-8s%-8s%-8s\n", "1.sor", "2.sor", "3.sor");
         for (int i = 1; i < pakli.length; i++) {
             nezet.kiirasf("%-8s", pakli[i].getErtek());
             if(i % 3 == 0){
                 nezet.kiiras("");
             }
         }
-        nezet.kiiras("__________________________");
+        
     }
     private static int melyik() {
         boolean jo;
@@ -50,7 +43,6 @@ public class Controller {
                 nezet.kiiras("Hibás, újra!");
             }
         } while (!jo);
-        
         return oszlop;
     }
     public static void kever(int oszlop) {
@@ -80,8 +72,16 @@ public class Controller {
         }
         pakli = uj;
     }
-    public static String ezVolt() {
-        
+    public static String ezVolt() {    
         return pakli[11].getErtek();
+    }
+    public void start(){
+    feltolt();
+        for (int i = 0; i < 3; i++) {
+            kirak();
+            int oszlop = melyik(); 
+            kever(oszlop); 
+        }
+        nezet.kiiras(ezVolt()); 
     }
 }
