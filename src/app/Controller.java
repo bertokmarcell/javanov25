@@ -10,13 +10,14 @@ import javax.swing.JTextArea;
 import javax.swing.JTextField;
 public class Controller {
     
-    private static Scanner sc = new Scanner(System.in);
     private static Nezet nezet = new Nezet();
     private static JFrame keret = new JFrame();
     private static JTextArea text = new JTextArea();
     private static JButton b1=new JButton();
     private static JButton b2=new JButton();
     private static JButton b3=new JButton();
+    private static String tarolo="";
+    private static int szamlalo =0;
     
     
     static Model[] pakli = new Model[22];
@@ -44,19 +45,6 @@ public class Controller {
             }
         }
         
-    }
-    private static int melyik() {
-        boolean jo;
-        int oszlop;
-        do {
-            nezet.kiirasegysorba("melyik oszlop (1-3): ");
-            oszlop = sc.nextInt();
-            jo = oszlop >= 1 && oszlop <= 3;
-            if(!jo){
-                nezet.kiiras("Hibás, újra!");
-            }
-        } while (!jo);
-        return oszlop;
     }
     public static void kever(int oszlop) {
         Model[] uj = new Model[22];
@@ -98,10 +86,13 @@ public class Controller {
         }
         nezet.kiiras(ezVolt()); 
     }
+    
     public static void gui_start(){
+        
         b1.setText("elso sor");
         b2.setText("masodik sor");
         b3.setText("harmadik sor");
+        
         keret.setLayout(new GridLayout(1, 1));
         b1.setSize(20,20);
         keret.setSize(500,350);
@@ -120,6 +111,25 @@ public class Controller {
                 kever(1);
                 text.setText("");
                 keretirasok(pakli);
+                szamlalo+=1;
+                if(szamlalo%3==0){
+                    tarolo=pakli[11].getErtek();
+                    text.setText("");
+                    feltolt();
+                    keretirasok(pakli);
+                    text.append("kivalaszott szama= ");
+                    text.append("\n"+tarolo);
+                    b1.setText("újra");
+                    b2.setText("újra");
+                    b3.setText("újra");
+                }
+                if(!(szamlalo%3==0)){
+                    b1.setText("els");
+                    b2.setText("mas");
+                    b3.setText("harm");
+                }
+                
+                
             }
                 
         });
@@ -129,6 +139,26 @@ public class Controller {
                 kever(2);
                 text.setText("");
                 keretirasok(pakli);
+                szamlalo+=1;
+                if(szamlalo%3==0){
+                    tarolo=pakli[11].getErtek();
+                    text.setText("");
+                    feltolt();
+                    keretirasok(pakli);
+                    text.append("kivalaszott szama= ");
+                    text.append("\n"+tarolo);
+                    
+                    b1.setText("újra");
+                    b2.setText("újra");
+                    b3.setText("újra");
+                }
+                if(!(szamlalo%3==0)){
+                    b1.setText("els");
+                    b2.setText("mas");
+                    b3.setText("harm");
+                }
+                
+                
             }
                 
         });
@@ -138,10 +168,32 @@ public class Controller {
                 kever(3);
                 text.setText("");
                 keretirasok(pakli);
+                szamlalo+=1;
+                if(szamlalo%3==0){
+                    tarolo=pakli[11].getErtek();
+                    text.setText("");
+                    feltolt();
+                    keretirasok(pakli);
+                    text.append("kivalaszott szama= ");
+                    text.append("\n"+tarolo);
+                    b1.setText("újra");
+                    b2.setText("újra");
+                    b3.setText("újra");
+                }
+                if(!(szamlalo%3==0)){
+                    b1.setText("els");
+                    b2.setText("mas");
+                    b3.setText("harm");
+                }
+                
+     
             }
                 
         });
+        
+        
     }
+    
     public static void keretirasok(Model[] kartyak){
         String s = "";
         for (int i = 1; i < kartyak.length; i++) {
