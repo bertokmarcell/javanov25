@@ -1,10 +1,23 @@
 package app;
+import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.Arrays;
 import java.util.Scanner;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JTextArea;
+import javax.swing.JTextField;
 public class Controller {
     
     private static Scanner sc = new Scanner(System.in);
     private static Nezet nezet = new Nezet();
+    private static JFrame keret = new JFrame();
+    private static JTextArea text = new JTextArea();
+    private static JButton b1=new JButton();
+    private static JButton b2=new JButton();
+    private static JButton b3=new JButton();
+    
     
     static Model[] pakli = new Model[22];
     
@@ -75,7 +88,8 @@ public class Controller {
     public static String ezVolt() {    
         return pakli[11].getErtek();
     }
-    public void start(){
+    public static void start(){
+        
     feltolt();
         for (int i = 0; i < 3; i++) {
             kirak();
@@ -83,5 +97,60 @@ public class Controller {
             kever(oszlop); 
         }
         nezet.kiiras(ezVolt()); 
+    }
+    public static void gui_start(){
+        b1.setText("elso sor");
+        b2.setText("masodik sor");
+        b3.setText("harmadik sor");
+        keret.setLayout(new GridLayout(1, 1));
+        b1.setSize(20,20);
+        keret.setSize(500,350);
+        text.setSize(150,200);
+        keret.setLocationRelativeTo(null);
+        feltolt();
+        keretirasok(pakli);
+        keret.add(text);
+        keret.add(b1);
+        keret.add(b2);
+        keret.add(b3);
+        keret.setVisible(true);
+        b1.addActionListener(new ActionListener(){
+            @Override
+            public void actionPerformed(ActionEvent e){
+                kever(1);
+                text.setText("");
+                keretirasok(pakli);
+            }
+                
+        });
+        b2.addActionListener(new ActionListener(){
+            @Override
+            public void actionPerformed(ActionEvent e){
+                kever(2);
+                text.setText("");
+                keretirasok(pakli);
+            }
+                
+        });
+        b3.addActionListener(new ActionListener(){
+            @Override
+            public void actionPerformed(ActionEvent e){
+                kever(3);
+                text.setText("");
+                keretirasok(pakli);
+            }
+                
+        });
+    }
+    public static void keretirasok(Model[] kartyak){
+        String s = "";
+        for (int i = 1; i < kartyak.length; i++) {
+            s=s+kartyak[i].getErtek()+"   ";
+            if(i % 3 == 0){
+                text.append(s+  "\n");
+                text.append("\n");
+                s="";
+            }
+        }
     }
 }
